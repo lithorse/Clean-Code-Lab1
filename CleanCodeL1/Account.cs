@@ -54,6 +54,14 @@ namespace CleanCodeL1
 
         public void Transfer(Account target, double amount)
         {
+            if (target == null)
+            {
+                throw new Exception("target account is null");
+            }
+            if (target == this)
+            {
+                throw new Exception("Cannot transfer to same account");
+            }
             Withdraw(amount);
             target.Deposit(amount);
         }

@@ -50,7 +50,7 @@ namespace CleanCodeL1Tests
         void TestsConstructorWithExtremeValues()
         {
             double balance = 1001283712893.12375;
-            double interest = 0.0000000000000000011231231;
+            double interest = 0.00000001123123;
             Assert.NotNull(new Account(balance, interest));
         }
 
@@ -273,6 +273,31 @@ namespace CleanCodeL1Tests
 
             Assert.Equal(expectedAccount1Balance, account1.Balance);
             Assert.Equal(expectedAccount2Balance, account2.Balance);
+        }
+
+        [Fact]
+        void TestsTransferWithNullAccount()
+        {
+            double balance1 = 100.75;
+            double interest1 = 0.1;
+            Account account1 = new Account(balance1, interest1);
+            Account account2 = null;
+
+            double transferAmount = 90;
+
+            Assert.Throws<Exception>(() => account1.Transfer(account2, transferAmount));
+        }
+
+        [Fact]
+        void TestsTransferWithSameAccount()
+        {
+            double balance1 = 100.75;
+            double interest1 = 0.1;
+            Account account1 = new Account(balance1, interest1);
+
+            double transferAmount = 90;
+
+            Assert.Throws<Exception>(() => account1.Transfer(account1, transferAmount));
         }
 
         [Fact]
